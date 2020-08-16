@@ -1,0 +1,108 @@
+========================
+var myLogFile = require('./logger');
+myLogFile('message from myLogFile');
+
+===============  Path  =================
+//Path
+const path = require('path');
+let pathObject = path.parse(__filename);
+console.log(pathObject);
+
+=============== OS Module ===============
+
+const os = require('os');
+let totalMem = os.totalmem();
+let freeMem = os.freemem();
+console.log(`Total memory is ${totalMem} and free space in memory is left is ${freeMem}`);
+
+===================>>  fs Module <<<=====================
+let fs = require('fs');
+
+//===== Synchronous =====
+//const files = fs.readdirSync('./');
+//console.log(files);
+
+
+//===== AaaaaaaSynchronous =====
+const fileAsync = fs.readdir('./', function(err, files) {
+    if(err){
+        console.log(`We caught the ${err}`);
+    }else{
+        console.log(`Success, Listing you the available file: ${[files]}`);
+    }
+})
+console.log(fileAsync);
+
+//===================>> Events <<===================
+
+const EventEmitter = require('events');
+//Class is container branch of related properties and methods
+const emitter = new EventEmitter();
+
+//Register a Listener
+emitter.on("MessageLogged", function(){
+    console.log("Listener called");
+})
+ 
+emitter.emit("MessageLogged");
+
+//EMIT: Make a noise, Signaling an event have happen
+
+
+//===================>> Events Arguments <<===================
+/*
+const EventEmitter = require('events');
+//Class is container branch of related properties and methods
+const emitter = new EventEmitter();
+
+//Register a Listener
+emitter.on("MessageLogged", (eventArgument) => {
+    console.log("Logged you event here : ", eventArgument);
+})
+ 
+emitter.emit("MessageLogged", {id: 1, url: "http://www.linkedin.com/swappy9/"});
+
+//EMIT: Make a noise, Signaling an event have happen
+
+
+//Task 1: using Arguments
+const EventEmitter1 = require('events')
+const emitter1 = new EventEmitter1();
+
+emitter1.on("messageLogged", function(args){
+    console.log("logging: ", args);
+});
+
+emitter1.emit("messageLogged", {data:"message"})
+
+
+//===================>>Extending Event Emitter <<===================
+
+************APP.JS****************
+const EventEmitter = require("events");
+
+const Logger = require('./logger');
+let logger = new Logger();
+
+logger.on('messedLogged',function(e) {
+    console.log("Listening to  :", e);
+});
+
+logger.mylogfile('mesage');
+
+*************************logger.js************
+const EventEmitter = require("events");
+
+var url = "http://mylogger.io/log";
+
+class Logger extends EventEmitter{
+  mylogfile(message) {
+    console.log(message);
+  
+    //To raise an event
+    this.emit("messageLogged", {id: 1})
+  }
+}
+
+module.exports = Logger;
+*/
